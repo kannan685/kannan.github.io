@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>EcoCycle — Live Greener, One Step at a Time</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+<style>
+*{box-sizing:border-box;margin:0;padding:0;}
+:root{
+  --green:#1D9E75;--green-light:#E1F5EE;--green-mid:#5DCAA5;--green-dark:#085041;
+  --text:#2C2C2A;--muted:#5F5E5A;--light:#B4B2A9;--bg:#f7f9f6;--white:#fff;
+  --border:#d3d1c7;--amber:#EF9F27;--blue:#378ADD;--pink:#D4537E;
+}
+html{scroll-behavior:smooth;}
+body{font-family:'DM Sans',sans-serif;color:var(--text);background:var(--bg);line-height:1.6;}
+
+/* NAV */
+nav{display:flex;align-items:center;justify-content:space-between;padding:16px 48px;background:var(--white);border-bottom:0.5px solid var(--border);position:sticky;top:0;z-index:200;}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none;}
+.logo-mark{width:34px;height:34px;background:var(--green);border-radius:50%;display:flex;align-items:center;justify-content:center;}
+.logo-text{font-family:'Playfair Display',serif;font-size:20px;font-weight:700;color:var(--green-dark);}
+nav ul{display:flex;gap:32px;list-style:none;}
+nav ul li a{text-decoration:none;color:var(--muted);font-size:14px;font-weight:400;transition:color 0.2s;}
+nav ul li a:hover,nav ul li a.active{color:var(--green);}
+.nav-cta{background:var(--green)!important;color:var(--white)!important;padding:8px 20px;border-radius:20px;font-size:13px!important;font-weight:500!important;}
+.nav-cta:hover{background:var(--green-dark)!important;}
+.hamburger{display:none;flex-direction:column;gap:4px;cursor:pointer;padding:4px;}
+.hamburger span{width:22px;height:2px;background:var(--text);border-radius:2px;display:block;}
+
+/* HERO */
+.hero{display:grid;grid-template-columns:1fr 1fr;gap:48px;padding:96px 48px 80px;max-width:1140px;margin:0 auto;align-items:center;}
+.hero-badge{display:inline-flex;align-items:center;gap:6px;background:var(--green-light);color:var(--green-dark);font-size:12px;font-weight:500;padding:6px 14px;border-radius:20px;letter-spacing:0.04em;margin-bottom:20px;}
+.hero h1{font-family:'Playfair Display',serif;font-size:52px;line-height:1.12;color:var(--green-dark);margin-bottom:20px;}
+.hero h1 em{color:var(--green);font-style:normal;}
+.hero-sub{color:var(--muted);font-size:16px;line-height:1.75;margin-bottom:32px;max-width:440px;}
+.hero-btns{display:flex;gap:12px;flex-wrap:wrap;}
+.btn{padding:12px 28px;border-radius:24px;font-size:14px;font-weight:500;cursor:pointer;font-family:'DM Sans',sans-serif;text-decoration:none;display:inline-block;border:none;transition:all 0.2s;}
+.btn-primary{background:var(--green);color:var(--white);}
+.btn-primary:hover{background:var(--green-dark);}
+.btn-outline{background:transparent;color:var(--green);border:1.5px solid var(--green);}
+.btn-outline:hover{background:var(--green-light);}
+.btn-sm{padding:8px 18px;font-size:13px;}
+.hero-visual{background:linear-gradient(135deg,#c8f0e2 0%,#e1f5ee 100%);border-radius:28px;padding:28px;display:flex;flex-direction:column;gap:14px;}
+.stat-card{background:var(--white);border-radius:14px;padding:16px 18px;display:flex;align-items:center;gap:14px;box-shadow:0 1px 4px rgba(0,0,0,0.05);}
+.stat-icon{width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:18px;}
+.stat-card-text p:first-child{font-size:18px;font-weight:500;color:var(--green-dark);}
+.stat-card-text p:last-child{font-size:12px;color:var(--muted);margin-top:1px;}
+
+/* TRUST BAR */
+.trust-bar{background:var(--green-dark);padding:16px 48px;display:flex;justify-content:center;gap:48px;flex-wrap:wrap;}
+.trust-item{color:#9FE1CB;font-size:13px;display:flex;align-items:center;gap:8px;}
+.trust-item strong{color:#E1F5EE;font-weight:500;}
+
+/* SECTIONS */
+.page-section{display:none;max-width:1140px;margin:0 auto;padding:64px 48px;}
+.page-section.active{display:block;}
+.section-header{margin-bottom:40px;}
+.section-header h2{font-family:'Playfair Display',serif;font-size:34px;color:var(--green-dark);margin-bottom:10px;}
+.section-header p{color:var(--muted);font-size:15px;max-width:560px;line-height:1.7;}
+.tag{display:inline-block;font-size:11px;font-weight:500;padding:3px 10px;border-radius:10px;letter-spacing:0.04em;text-transform:uppercase;}
+.tag-green{background:var(--green-light);color:var(--green-dark);}
+.tag-blue{background:#E6F1FB;color:#185FA5;}
+.tag-amber{background:#FAEEDA;color:#633806;}
+.tag-pink{background:#FBEAF0;color:#72243E;}
+
+/* LEARN */
+.article-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;}
+.article-card{background:var(--white);border:0.5px solid var(--border);border-radius:16px;overflow:hidden;transition:border-color 0.2s;}
+.article-card:hover{border-color:var(--green);}
+.article-img{height:140px;display:flex;align-items:center;justify-content:center;font-size:48px;}
+.article-body{padding:20px 22px;}
+.article-meta{display:flex;align-items:center;gap:8px;margin-bottom:10px;}
+.article-body h3{font-size:16px;font-weight:500;color:var(--green-dark);margin-bottom:8px;line-height:1.4;}
+.article-body p{font-size:13px;color:var(--muted);line-height:1.65;margin-bottom:14px;}
+.article-footer{display:flex;justify-content:space-between;align-items:center;font-size:12px;color:var(--light);}
+.read-link{color:var(--green);font-size:13px;font-weight:500;cursor:pointer;background:none;border:none;font-family:'DM Sans',sans-serif;}
+
+/* ECOTIPS */
+.tips-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:32px;}
+.tip-card{background:var(--green-light);border-radius:12px;padding:18px;display:flex;gap:12px;}
+.tip-num{font-family:'Playfair Display',serif;font-size:28px;font-weight:700;color:var(--green-mid);flex-shrink:0;line-height:1;}
+.tip-text{font-size:13px;color:var(--green-dark);line-height:1.6;}
+.tip-text strong{font-weight:500;display:block;margin-bottom:3px;}
+
+/* ACTION */
+.action-layout{display:grid;grid-template-columns:1fr 1fr;gap:28px;}
+.score-panel{background:var(--white);border:0.5px solid var(--border);border-radius:16px;padding:24px;}
+.score-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:24px;}
+.score-top h3{font-size:17px;font-weight:500;color:var(--green-dark);}
+.score-circle{width:80px;height:80px;border-radius:50%;background:var(--green-light);border:3px solid var(--green);display:flex;flex-direction:column;align-items:center;justify-content:center;}
+.score-circle span:first-child{font-size:24px;font-weight:600;color:var(--green);line-height:1;}
+.score-circle span:last-child{font-size:10px;color:var(--muted);}
+.progress-row{margin-bottom:14px;}
+.progress-labels{display:flex;justify-content:space-between;font-size:12px;color:var(--muted);margin-bottom:5px;}
+.progress-track{height:7px;background:#E1F5EE;border-radius:4px;}
+.progress-fill{height:100%;border-radius:4px;background:var(--green);transition:width 0.8s ease;}
+.challenges-panel{background:var(--white);border:0.5px solid var(--border);border-radius:16px;padding:24px;}
+.challenges-panel h3{font-size:17px;font-weight:500;color:var(--green-dark);margin-bottom:6px;}
+.challenges-panel p{font-size:13px;color:var(--muted);margin-bottom:18px;}
+.challenge-item{display:flex;align-items:center;gap:12px;padding:12px;border-radius:10px;background:var(--bg);margin-bottom:8px;cursor:pointer;transition:background 0.2s;}
+.challenge-item:hover{background:var(--green-light);}
+.challenge-item.done{opacity:0.55;}
+.challenge-item.done .challenge-title{text-decoration:line-through;}
+.challenge-check{width:22px;height:22px;border-radius:50%;border:1.5px solid var(--border);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:12px;transition:all 0.2s;}
+.challenge-item.done .challenge-check{background:var(--green);border-color:var(--green);color:var(--white);}
+.challenge-title{font-size:13px;font-weight:400;color:var(--text);}
+.challenge-pts{margin-left:auto;font-size:11px;color:var(--green);background:var(--green-light);padding:2px 8px;border-radius:8px;}
+
+/* COMMUNITY */
+.community-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;}
+.community-card{background:var(--white);border:0.5px solid var(--border);border-radius:16px;padding:22px;}
+.community-card h3{font-size:15px;font-weight:500;color:var(--green-dark);margin:10px 0 8px;}
+.community-card p{font-size:13px;color:var(--muted);line-height:1.65;margin-bottom:14px;}
+.member-row{display:flex;align-items:center;gap:-6px;margin-bottom:12px;}
+.avatar{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:500;border:2px solid var(--white);margin-right:-6px;}
+.member-count{font-size:12px;color:var(--muted);margin-left:14px;}
+.forum-item{padding:12px 0;border-bottom:0.5px solid var(--border);display:flex;justify-content:space-between;align-items:center;}
+.forum-item:last-child{border-bottom:none;padding-bottom:0;}
+.forum-item h4{font-size:13px;font-weight:400;color:var(--text);margin-bottom:2px;}
+.forum-item span{font-size:11px;color:var(--muted);}
+.forum-replies{font-size:11px;color:var(--green);background:var(--green-light);padding:2px 8px;border-radius:8px;white-space:nowrap;}
+.newsletter-form{display:flex;gap:8px;margin-top:14px;}
+.newsletter-form input{flex:1;padding:10px 14px;border:0.5px solid var(--border);border-radius:10px;font-size:13px;font-family:'DM Sans',sans-serif;outline:none;background:var(--bg);}
+.newsletter-form input:focus{border-color:var(--green);}
+.newsletter-form button{background:var(--green);color:var(--white);border:none;padding:10px 18px;border-radius:10px;font-size:13px;cursor:pointer;font-family:'DM Sans',sans-serif;white-space:nowrap;}
+
+/* SHOP */
+.shop-filters{display:flex;gap:8px;margin-bottom:28px;flex-wrap:wrap;}
+.filter-btn{background:var(--white);border:0.5px solid var(--border);color:var(--muted);padding:7px 16px;border-radius:18px;font-size:13px;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all 0.2s;}
+.filter-btn.active,.filter-btn:hover{background:var(--green);color:var(--white);border-color:var(--green);}
+.shop-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:20px;}
+.product-card{background:var(--white);border:0.5px solid var(--border);border-radius:16px;overflow:hidden;transition:border-color 0.2s;}
+.product-card:hover{border-color:var(--green);}
+.product-img{height:110px;display:flex;align-items:center;justify-content:center;font-size:44px;}
+.product-body{padding:14px 16px;}
+.product-badge{font-size:10px;font-weight:500;padding:2px 8px;border-radius:8px;display:inline-block;margin-bottom:6px;}
+.eco-badge{background:var(--green-light);color:var(--green-dark);}
+.sale-badge{background:#FAEEDA;color:#633806;}
+.product-body h4{font-size:14px;font-weight:500;color:var(--green-dark);margin-bottom:4px;line-height:1.35;}
+.product-body .desc{font-size:12px;color:var(--muted);margin-bottom:10px;line-height:1.5;}
+.price-row{display:flex;align-items:center;gap:6px;margin-bottom:10px;}
+.price{font-size:16px;font-weight:600;color:var(--green);}
+.old-price{font-size:12px;color:var(--light);text-decoration:line-through;}
+.add-btn{width:100%;background:var(--green-light);color:var(--green-dark);border:none;padding:9px;border-radius:9px;font-size:13px;cursor:pointer;font-family:'DM Sans',sans-serif;font-weight:500;transition:background 0.2s;}
+.add-btn:hover{background:var(--green);color:var(--white);}
+.cart-count{background:var(--green);color:var(--white);border-radius:50%;width:18px;height:18px;font-size:10px;display:inline-flex;align-items:center;justify-content:center;margin-left:4px;}
+
+/* MODAL */
+.modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.45);z-index:500;align-items:center;justify-content:center;}
+.modal-overlay.open{display:flex;}
+.modal{background:var(--white);border-radius:20px;max-width:640px;width:90%;max-height:80vh;overflow-y:auto;padding:36px;}
+.modal h2{font-family:'Playfair Display',serif;font-size:24px;color:var(--green-dark);margin-bottom:8px;}
+.modal .meta{font-size:13px;color:var(--muted);margin-bottom:20px;display:flex;gap:12px;}
+.modal p{font-size:14px;color:var(--text);line-height:1.75;margin-bottom:16px;}
+.modal h4{font-size:15px;font-weight:500;color:var(--green-dark);margin:20px 0 8px;}
+.modal ul{padding-left:18px;margin-bottom:14px;}
+.modal ul li{font-size:14px;color:var(--text);line-height:1.75;}
+.modal-close{float:right;background:var(--bg);border:none;border-radius:50%;width:32px;height:32px;font-size:16px;cursor:pointer;color:var(--muted);margin:-8px -8px 0 0;}
+.toast{position:fixed;bottom:28px;right:28px;background:var(--green-dark);color:var(--white);padding:12px 20px;border-radius:12px;font-size:13px;z-index:600;opacity:0;transform:translateY(10px);transition:all 0.3s;pointer-events:none;}
+.toast.show{opacity:1;transform:translateY(0);}
+
+/* FOOTER */
+footer{background:var(--green-dark);padding:48px;margin-top:0;}
+.footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:32px;max-width:1140px;margin:0 auto 40px;}
+.footer-brand p{font-size:13px;color:#9FE1CB;line-height:1.7;margin-top:10px;max-width:220px;}
+.footer-col h4{font-size:13px;font-weight:500;color:#E1F5EE;margin-bottom:14px;letter-spacing:0.03em;}
+.footer-col ul{list-style:none;}
+.footer-col ul li{margin-bottom:8px;}
+.footer-col ul li a{color:#9FE1CB;text-decoration:none;font-size:13px;transition:color 0.2s;}
+.footer-col ul li a:hover{color:var(--white);}
+.footer-bottom{border-top:0.5px solid rgba(255,255,255,0.1);padding-top:24px;max-width:1140px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;}
+.footer-bottom p{color:#5DCAA5;font-size:12px;}
+.social-links{display:flex;gap:12px;}
+.social-link{width:32px;height:32px;border:0.5px solid rgba(255,255,255,0.2);border-radius:50%;display:flex;align-items:center;justify-content:center;color:#9FE1CB;font-size:13px;text-decoration:none;transition:all 0.2s;}
+.social-link:hover{background:var(--green);border-color:var(--green);color:var(--white);}
+
+@media(max-width:768px){
+  nav{padding:14px 20px;}
+  nav ul{display:none;}
+  .hamburger{display:flex;}
+  .hero{grid-template-columns:1fr;padding:48px 20px 40px;gap:32px;}
+  .hero h1{font-size:36px;}
+  .hero-visual{display:none;}
+  .trust-bar{padding:14px 20px;gap:20px;}
+  .page-section{padding:48px 20px;}
+  .article-grid,.action-layout,.community-grid{grid-template-columns:1fr;}
+  .tips-grid{grid-template-columns:1fr;}
+  .footer-grid{grid-template-columns:1fr 1fr;}
+  .footer-bottom{flex-direction:column;gap:14px;text-align:center;}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="logo" onclick="showSection('home')">
+    <div class="logo-mark">
+      <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M9 2C5.5 2 3 5 3 8c0 2.5 1.5 4.5 4 5.5V16h4v-2.5c2.5-1 4-3 4-5.5 0-3-2.5-6-6-6z" fill="#fff" opacity="0.9"/><circle cx="9" cy="7" r="1.5" fill="#fff" opacity="0.5"/></svg>
+    </div>
+    <span class="logo-text">EcoCycle</span>
+  </a>
+  <ul id="nav-links">
+    <li><a href="#" onclick="showSection('home')" id="nav-home" class="active">Home</a></li>
+    <li><a href="#" onclick="showSection('learn')" id="nav-learn">Learn</a></li>
+    <li><a href="#" onclick="showSection('action')" id="nav-action">Take Action</a></li>
+    <li><a href="#" onclick="showSection('community')" id="nav-community">Community</a></li>
+    <li><a href="#" onclick="showSection('shop')" id="nav-shop" class="nav-cta">Shop <span class="cart-count" id="cart-count">0</span></a></li>
+  </ul>
+  <div class="hamburger" onclick="toggleMobileNav()"><span></span><span></span><span></span></div>
+</nav>
+
+<!-- HERO (shown only on home) -->
+<div id="hero-block">
+  <div class="hero">
+    <div>
+      <div class="hero-badge">🌍 Sustainability for everyone</div>
+      <h1>Live <em>greener</em>,<br>one step at a time.</h1>
+      <p class="hero-sub">EcoCycle helps you build eco-friendly habits, discover sustainable products, connect with a passionate community, and track your real environmental impact.</p>
+      <div class="hero-btns">
+        <a href="#" class="btn btn-primary" onclick="showSection('action')">Start your journey</a>
+        <a href="#" class="btn btn-outline" onclick="showSection('learn')">Explore guides</a>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="stat-card"><div class="stat-icon" style="background:#E1F5EE;">🌱</div><div class="stat-card-text"><p>12,400+</p><p>Eco actions taken this week</p></div></div>
+      <div class="stat-card"><div class="stat-icon" style="background:#E6F1FB;">👥</div><div class="stat-card-text"><p>3,800+</p><p>Community members worldwide</p></div></div>
+      <div class="stat-card"><div class="stat-icon" style="background:#FAEEDA;">♻️</div><div class="stat-card-text"><p>520 tons</p><p>CO₂ offset by our community</p></div></div>
+    </div>
+  </div>
+  <div class="trust-bar">
+    <div class="trust-item">✅ <span><strong>100%</strong> plastic-free packaging</span></div>
+    <div class="trust-item">🌳 <span>We plant <strong>1 tree</strong> per order</span></div>
+    <div class="trust-item">🔋 <span>Powered by <strong>renewable energy</strong></span></div>
+    <div class="trust-item">🤝 <span>Partnered with <strong>15 nonprofits</strong></span></div>
+  </div>
+</div>
+
+<!-- HOME SECTION -->
+<div class="page-section active" id="sec-home" style="max-width:1140px;margin:0 auto;padding:64px 48px;">
+  <div class="section-header">
+    <h2>Everything you need to live sustainably</h2>
+    <p>From bite-sized eco-tips to a full sustainability score, EcoCycle gives you the tools, knowledge, and community to make a real difference.</p>
+  </div>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:20px;">
+    <div style="background:var(--white);border:0.5px solid var(--border);border-radius:16px;padding:22px;cursor:pointer;" onclick="showSection('learn')">
+      <div style="font-size:28px;margin-bottom:12px;">📚</div>
+      <span class="tag tag-green">Learn</span>
+      <h3 style="font-size:16px;font-weight:500;color:var(--green-dark);margin:10px 0 8px;">Expert guides & articles</h3>
+      <p style="font-size:13px;color:var(--muted);line-height:1.65;">Research-backed articles, EcoTips, and infographics on plastic, energy, diet, and more.</p>
+    </div>
+    <div style="background:var(--white);border:0.5px solid var(--border);border-radius:16px;padding:22px;cursor:pointer;" onclick="showSection('action')">
+      <div style="font-size:28px;margin-bottom:12px;">🎯</div>
+      <span class="tag tag-blue">Take Action</span>
+      <h3 style="font-size:16px;font-weight:500;color:var(--green-dark);margin:10px 0 8px;">Track your impact</h3>
+      <p style="font-size:13px;color:var(--muted);line-height:1.65;">Complete daily challenges, earn points, and watch your sustainability score climb week by week.</p>
+    </div>
+    <div style="background:var(--white);border:0.5px solid var(--border);border-radius:16px;padding:22px;cursor:pointer;" onclick="showSection('community')">
+      <div style="font-size:28px;margin-bottom:12px;">🌐</div>
+      <span class="tag tag-pink">Community</span>
+      <h3 style="font-size:16px;font-weight:500;color:var(--green-dark);margin:10px 0 8px;">Connect with changemakers</h3>
+      <p style="font-size:13px;color:var(--muted);line-height:1.65;">Join 3,800+ members sharing tips, hosting events, and collaborating on local eco-initiatives.</p>
+    </div>
+    <div style="background:var(--white);border:0.5px solid var(--border);border-radius:16px;padding:22px;cursor:pointer;" onclick="showSection('shop')">
+      <div style="font-size:28px;margin-bottom:12px;">🛒</div>
+      <span class="tag tag-amber">Shop</span>
+      <h3 style="font-size:16px;font-weight:500;color:var(--green-dark);margin:10px 0 8px;">Curated eco products</h3>
+      <p style="font-size:13px;color:var(--muted);line-height:1.65;">Every product in our store is vetted for sustainability, zero-waste packaging, and ethical sourcing.</p>
+    </div>
+  </div>
+</div>
+
+<!-- LEARN SECTION -->
+<div class="page-section" id="sec-learn">
+  <div class="section-header">
+    <h2>Learn & get inspired</h2>
+    <p>Practical, science-backed guides to help you make smarter choices for the planet — without the overwhelm.</p>
+  </div>
+  <div class="article-grid">
+    <div class="article-card" onclick="openArticle('plastic')">
+      <div class="article-img" style="background:#E1F5EE;">♻️</div>
+      <div class="article-body">
+        <div class="article-meta"><span class="tag tag-green">Guide</span><span style="font-size:12px;color:var(--muted);">5 min read</span></div>
+        <h3>10 simple ways to reduce your plastic footprint</h3>
+        <p>Every year, over 380 million tons of plastic are produced worldwide. Here are ten practical, tested changes you can make starting today.</p>
+        <div class="article-footer"><span>By Maya Chen · June 2025</span><button class="read-link">Read article →</button></div>
+      </div>
+    </div>
+    <div class="article-card" onclick="openArticle('recycling')">
+      <div class="article-img" style="background:#E6F1FB;">🔵</div>
+      <div class="article-body">
+        <div class="article-meta"><span class="tag tag-blue">Deep Dive</span><span style="font-size:12px;color:var(--muted);">8 min read</span></div>
+        <h3>The importance of recycling: what you actually need to know</h3>
+        <p>Recycling myths are everywhere. We break down what's worth doing, what's greenwashing, and how to recycle effectively in 2025.</p>
+        <div class="article-footer"><span>By Dr. James Okafor · May 2025</span><button class="read-link">Read article →</button></div>
+      </div>
+    </div>
+    <div class="article-card" onclick="openArticle('busy')">
+      <div class="article-img" style="background:#FBEAF0;">🌸</div>
+      <div class="article-body">
+        <div class="article-meta"><span class="tag tag-pink">Lifestyle</span><span style="font-size:12px;color:var(--muted);">4 min read</span></div>
+        <h3>Sustainable living tips for busy people</h3>
+        <p>You don't need hours a day to live sustainably. These micro-habits fit into your existing routine and add up to real, measurable impact.</p>
+        <div class="article-footer"><span>By Priya Nair · April 2025</span><button class="read-link">Read article →</button></div>
+      </div>
+    </div>
+    <div class="article-card" onclick="openArticle('carbon')">
+      <div class="article-img" style="background:#FAEEDA;">🌡️</div>
+      <div class="article-body">
+        <div class="article-meta"><span class="tag tag-amber">Climate</span><span style="font-size:12px;color:var(--muted);">7 min read</span></div>
+        <h3>Understanding your personal carbon footprint</h3>
+        <p>Transport, diet, energy, and shopping — we explain how to calculate your footprint and which changes have the biggest impact on emissions.</p>
+        <div class="article-footer"><span>By Lena Hoffman · March 2025</span><button class="read-link">Read article →</button></div>
+      </div>
+    </div>
+  </div>
+
+  <h3 style="font-family:'Playfair Display',serif;font-size:22px;color:var(--green-dark);margin:48px 0 4px;">Quick EcoTips</h3>
+  <p style="font-size:14px;color:var(--muted);margin-bottom:0;">Small changes, big results. Try one this week.</p>
+  <div class="tips-grid">
+    <div class="tip-card"><div class="tip-num">01</div><div class="tip-text"><strong>Switch to a bamboo toothbrush</strong>Over a billion plastic toothbrushes end up in landfills every year. Bamboo biodegrades in 3–6 months.</div></div>
+    <div class="tip-card"><div class="tip-num">02</div><div class="tip-text"><strong>Eat one plant-based meal a day</strong>Shifting just one meal reduces your dietary carbon footprint by up to 35% over the course of a year.</div></div>
+    <div class="tip-card"><div class="tip-num">03</div><div class="tip-text"><strong>Unplug devices on standby</strong>Standby power accounts for 10% of household energy bills. Use a smart power strip to cut it automatically.</div></div>
+    <div class="tip-card"><div class="tip-num">04</div><div class="tip-text"><strong>Carry a reusable water bottle</strong>The average person uses 156 plastic bottles a year. A reusable bottle pays back its carbon cost in under 2 weeks.</div></div>
+    <div class="tip-card"><div class="tip-num">05</div><div class="tip-text"><strong>Buy second-hand first</strong>Before purchasing new, check local thrift stores or apps like Vinted or ThredUp. Fashion is responsible for 10% of global emissions.</div></div>
+    <div class="tip-card"><div class="tip-num">06</div><div class="tip-text"><strong>Start a kitchen compost bin</strong>Food waste in landfills produces methane, a gas 25x more potent than CO₂. Composting is one of the highest-impact changes you can make at home.</div></div>
+  </div>
+</div>
+
+<!-- ACTION SECTION -->
+<div class="page-section" id="sec-action">
+  <div class="section-header">
+    <h2>Take action</h2>
+    <p>Your sustainability journey, tracked and gamified. Complete challenges, earn points, and watch your positive impact grow.</p>
+  </div>
+  <div class="action-layout">
+    <div class="score-panel">
+      <div class="score-top">
+        <div><h3>Your sustainability score</h3><p style="font-size:13px;color:var(--muted);margin-top:4px;">Updated as you complete challenges</p></div>
+        <div class="score-circle"><span id="score-display">72</span><span>/ 100</span></div>
+      </div>
+      <div class="progress-row"><div class="progress-labels"><span>Transport</span><span id="p-transport">80%</span></div><div class="progress-track"><div class="progress-fill" id="fill-transport" style="width:80%;background:#1D9E75;"></div></div></div>
+      <div class="progress-row"><div class="progress-labels"><span>Energy use</span><span id="p-energy">65%</span></div><div class="progress-track"><div class="progress-fill" id="fill-energy" style="width:65%;background:#378ADD;"></div></div></div>
+      <div class="progress-row"><div class="progress-labels"><span>Diet & food</span><span id="p-diet">70%</span></div><div class="progress-track"><div class="progress-fill" id="fill-diet" style="width:70%;background:#EF9F27;"></div></div></div>
+      <div class="progress-row"><div class="progress-labels"><span>Shopping</span><span id="p-shop">55%</span></div><div class="progress-track"><div class="progress-fill" id="fill-shop" style="width:55%;background:#D4537E;"></div></div></div>
+      <div style="margin-top:18px;padding:14px;background:var(--green-light);border-radius:10px;font-size:13px;color:var(--green-dark);">
+        <strong style="display:block;margin-bottom:4px;">💡 Next milestone: 80 points</strong>
+        Complete 3 more challenges to unlock the "Eco Advocate" badge and 20% off your next shop order.
+      </div>
+    </div>
+    <div class="challenges-panel">
+      <h3>This week's challenges</h3>
+      <p>Click to mark as complete. Each challenge earns points toward your score.</p>
+      <div class="challenge-item done" onclick="toggleChallenge(this)"><div class="challenge-check">✓</div><span class="challenge-title">Bring a reusable bag shopping</span><span class="challenge-pts">+5 pts</span></div>
+      <div class="challenge-item done" onclick="toggleChallenge(this)"><div class="challenge-check">✓</div><span class="challenge-title">Skip meat for one meal</span><span class="challenge-pts">+8 pts</span></div>
+      <div class="challenge-item" onclick="toggleChallenge(this)"><div class="challenge-check"></div><span class="challenge-title">Take public transport or cycle</span><span class="challenge-pts">+10 pts</span></div>
+      <div class="challenge-item" onclick="toggleChallenge(this)"><div class="challenge-check"></div><span class="challenge-title">Turn off all unused lights & standby</span><span class="challenge-pts">+5 pts</span></div>
+      <div class="challenge-item" onclick="toggleChallenge(this)"><div class="challenge-check"></div><span class="challenge-title">Compost your food scraps today</span><span class="challenge-pts">+8 pts</span></div>
+      <div class="challenge-item" onclick="toggleChallenge(this)"><div class="challenge-check"></div><span class="challenge-title">Refuse a plastic straw or bag</span><span class="challenge-pts">+5 pts</span></div>
+      <div class="challenge-item" onclick="toggleChallenge(this)"><div class="challenge-check"></div><span class="challenge-title">Buy something second-hand this week</span><span class="challenge-pts">+12 pts</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- COMMUNITY SECTION -->
+<div class="page-section" id="sec-community">
+  <div class="section-header">
+    <h2>Join our community</h2>
+    <p>3,800+ members across 40 countries sharing tips, organising events, and holding each other accountable — one eco-habit at a time.</p>
+  </div>
+  <div class="community-grid">
+    <div class="community-card">
+      <span class="tag tag-green">Active forum</span>
+      <h3>♻️ Plastic-Free July challenge</h3>
+      <p>This month, 340 members are sharing their plastic-free swaps, wins, and honest struggles. A judgment-free space to grow together.</p>
+      <div class="member-row">
+        <div class="avatar" style="background:#E1F5EE;color:#085041;">MR</div>
+        <div class="avatar" style="background:#E6F1FB;color:#185FA5;">JO</div>
+        <div class="avatar" style="background:#FAEEDA;color:#633806;">PN</div>
+        <div class="avatar" style="background:#FBEAF0;color:#72243E;">LH</div>
+        <span class="member-count">+336 members</span>
+      </div>
+      <button class="btn btn-outline btn-sm" onclick="showToast('Joined Plastic-Free July!')">Join discussion</button>
+    </div>
+    <div class="community-card">
+      <span class="tag tag-blue">Upcoming events</span>
+      <h3>🧹 Community clean-up drives</h3>
+      <p>Local clean-up events are happening in 15 cities this month. Every piece of litter collected is logged and contributes to our global impact score.</p>
+      <div style="margin-bottom:14px;">
+        <div class="forum-item"><div><h4>Chennai Beach Clean-Up</h4><span>Sat 19 Apr · Marina Beach</span></div><span class="forum-replies">12 going</span></div>
+        <div class="forum-item"><div><h4>London Park Restoration</h4><span>Sun 20 Apr · Victoria Park</span></div><span class="forum-replies">28 going</span></div>
+        <div class="forum-item" style="border:none;padding-bottom:0;"><div><h4>Mumbai Mangrove Walk</h4><span>Sat 26 Apr · Versova</span></div><span class="forum-replies">19 going</span></div>
+      </div>
+      <button class="btn btn-outline btn-sm" onclick="showToast('Event details sent to your email!')">Find an event near you</button>
+    </div>
+    <div class="community-card">
+      <span class="tag tag-amber">Discussion</span>
+      <h3>💬 Latest forum threads</h3>
+      <div>
+        <div class="forum-item"><div><h4>Best zero-waste kitchen swaps under $20?</h4><span>Posted by @greenguru · 2h ago</span></div><span class="forum-replies">34 replies</span></div>
+        <div class="forum-item"><div><h4>Is fast fashion ever okay to buy?</h4><span>Posted by @ecowatcher · 5h ago</span></div><span class="forum-replies">61 replies</span></div>
+        <div class="forum-item"><div><h4>My 30-day vegan experiment — honest review</h4><span>Posted by @plantpowered · 1d ago</span></div><span class="forum-replies">48 replies</span></div>
+        <div class="forum-item" style="border:none;padding-bottom:0;"><div><h4>Solar panels worth it in 2025?</h4><span>Posted by @sunroof22 · 2d ago</span></div><span class="forum-replies">27 replies</span></div>
+      </div>
+    </div>
+    <div class="community-card">
+      <span class="tag tag-pink">Newsletter</span>
+      <h3>📬 The Weekly EcoDigest</h3>
+      <p>Every Friday, we send a curated round-up of sustainability news, community highlights, new eco-tips, and exclusive shop discounts. Join 2,100+ subscribers.</p>
+      <ul style="font-size:13px;color:var(--muted);padding-left:18px;margin-bottom:16px;line-height:1.9;">
+        <li>Latest environmental news, curated</li>
+        <li>Community member spotlights</li>
+        <li>Exclusive subscriber discounts</li>
+        <li>Monthly challenge announcements</li>
+      </ul>
+      <div class="newsletter-form">
+        <input type="email" placeholder="your@email.com" id="email-input"/>
+        <button onclick="subscribeNewsletter()">Subscribe</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SHOP SECTION -->
+<div class="page-section" id="sec-shop">
+  <div class="section-header">
+    <h2>Eco-friendly shop</h2>
+    <p>Every product is vetted for sustainability, zero-waste packaging, and ethical sourcing. We plant a tree for every order placed.</p>
+  </div>
+  <div class="shop-filters">
+    <button class="filter-btn active" onclick="filterShop(this,'all')">All products</button>
+    <button class="filter-btn" onclick="filterShop(this,'home')">Home & Kitchen</button>
+    <button class="filter-btn" onclick="filterShop(this,'personal')">Personal Care</button>
+    <button class="filter-btn" onclick="filterShop(this,'garden')">Garden</button>
+    <button class="filter-btn" onclick="filterShop(this,'food')">Food & Drink</button>
+  </div>
+  <div class="shop-grid" id="shop-grid">
+    <div class="product-card" data-cat="personal"><div class="product-img" style="background:#E1F5EE;">🪥</div><div class="product-body"><span class="product-badge eco-badge">Zero-waste</span><h4>Bamboo toothbrush set (4 pack)</h4><p class="desc">BPA-free bristles, FSC-certified bamboo handle. Biodegrades in 3–6 months.</p><div class="price-row"><span class="price">$12.99</span><span class="old-price">$16.00</span></div><button class="add-btn" onclick="addToCart(this,'Bamboo Toothbrush Set')">Add to cart</button></div></div>
+    <div class="product-card" data-cat="home"><div class="product-img" style="background:#E6F1FB;">🧻</div><div class="product-body"><span class="product-badge eco-badge">Plastic-free</span><h4>Reusable beeswax food wraps</h4><p class="desc">Replace cling film with these washable, reusable beeswax-coated cotton wraps. Set of 3.</p><div class="price-row"><span class="price">$18.50</span></div><button class="add-btn" onclick="addToCart(this,'Beeswax Wraps')">Add to cart</button></div></div>
+    <div class="product-card" data-cat="garden"><div class="product-img" style="background:#FAEEDA;">🌱</div><div class="product-body"><span class="product-badge sale-badge">On sale</span><h4>Indoor herb seed starter kit</h4><p class="desc">Basil, mint, coriander & thyme. Peat-free compost, biodegradable pots included.</p><div class="price-row"><span class="price">$24.00</span><span class="old-price">$30.00</span></div><button class="add-btn" onclick="addToCart(this,'Seed Starter Kit')">Add to cart</button></div></div>
+    <div class="product-card" data-cat="personal"><div class="product-img" style="background:#EAF3DE;">🧴</div><div class="product-body"><span class="product-badge eco-badge">Vegan</span><h4>Zero-waste shampoo bar</h4><p class="desc">Replaces 3 plastic bottles. Lasts 80+ washes. Sulphate-free, for all hair types.</p><div class="price-row"><span class="price">$9.99</span></div><button class="add-btn" onclick="addToCart(this,'Shampoo Bar')">Add to cart</button></div></div>
+    <div class="product-card" data-cat="home"><div class="product-img" style="background:#FBEAF0;">🧺</div><div class="product-body"><span class="product-badge eco-badge">Plastic-free</span><h4>Organic cotton mesh produce bags</h4><p class="desc">Set of 6 reusable bags for fruit & veg. Machine washable, GOTS certified.</p><div class="price-row"><span class="price">$14.99</span><span class="old-price">$18.00</span></div><button class="add-btn" onclick="addToCart(this,'Produce Bags')">Add to cart</button></div></div>
+    <div class="product-card" data-cat="food"><div class="product-img" style="background:#FAEEDA;">☕</div><div class="product-body"><span class="product-badge eco-badge">Fair trade</span><h4>Compostable coffee pods (30 pack)</h4><p class="desc">Nespresso compatible. 100% compostable pod, organic Arabica, fair trade certified.</p><div class="price-row"><span class="price">$19.99</span></div><button class="add-btn" onclick="addToCart(this,'Compostable Coffee Pods')">Add to cart</button></div></div>
+    <div class="product-card" data-cat="home"><div class="product-img" style="background:#E1F5EE;">🪣</div><div class="product-body"><span class="product-badge eco-badge">Zero-waste</span><h4>Kitchen compost caddy</h4><p class="desc">Stainless steel, odour-filter lid, 5L capacity. Comes with 50 compostable liners.</p><div class="price-row"><span class="price">$34.00</span></div><button class="add-btn" onclick="addToCart(this,'Compost Caddy')">Add to cart</button></div></div>
+    <div class="product-card" data-cat="personal"><div class="product-img" style="background:#E6F1FB;">💧</div><div class="product-body"><span class="product-badge sale-badge">Best seller</span><h4>Stainless steel water bottle (750ml)</h4><p class="desc">Double-walled, keeps drinks cold 24h / hot 12h. Lifetime guarantee. Zero plastic.</p><div class="price-row"><span class="price">$28.00</span><span class="old-price">$35.00</span></div><button class="add-btn" onclick="addToCart(this,'Steel Water Bottle')">Add to cart</button></div></div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:6px;">
+        <div class="logo-mark"><svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M9 2C5.5 2 3 5 3 8c0 2.5 1.5 4.5 4 5.5V16h4v-2.5c2.5-1 4-3 4-5.5 0-3-2.5-6-6-6z" fill="#fff" opacity="0.9"/><circle cx="9" cy="7" r="1.5" fill="#fff" opacity="0.5"/></svg></div>
+        <span style="font-family:'Playfair Display',serif;font-size:18px;font-weight:700;color:#E1F5EE;">EcoCycle</span>
+      </div>
+      <p>Making sustainable living accessible, affordable, and community-driven. For people who care about the planet.</p>
+    </div>
+    <div class="footer-col"><h4>Explore</h4><ul><li><a href="#" onclick="showSection('learn')">Learn</a></li><li><a href="#" onclick="showSection('action')">Take Action</a></li><li><a href="#" onclick="showSection('community')">Community</a></li><li><a href="#" onclick="showSection('shop')">Shop</a></li></ul></div>
+    <div class="footer-col"><h4>Company</h4><ul><li><a href="#">About us</a></li><li><a href="#">Our mission</a></li><li><a href="#">Partnerships</a></li><li><a href="#">Press</a></li></ul></div>
+    <div class="footer-col"><h4>Support</h4><ul><li><a href="#">Help centre</a></li><li><a href="#">Returns policy</a></li><li><a href="#">Shipping info</a></li><li><a href="#">Contact us</a></li></ul></div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2025 EcoCycle. All rights reserved. · <a href="#" style="color:#5DCAA5;text-decoration:none;">Privacy policy</a> · <a href="#" style="color:#5DCAA5;text-decoration:none;">Terms</a></p>
+    <div class="social-links">
+      <a href="#" class="social-link">𝕏</a>
+      <a href="#" class="social-link">in</a>
+      <a href="#" class="social-link">f</a>
+      <a href="#" class="social-link">📸</a>
+    </div>
+  </div>
+</footer>
+
+<!-- ARTICLE MODAL -->
+<div class="modal-overlay" id="article-modal" onclick="closeModal(event)">
+  <div class="modal" id="modal-content"></div>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
+
+<script>
+var cartCount = 0;
+
+var articles = {
+  plastic: {
+    title: "10 simple ways to reduce your plastic footprint",
+    author: "Maya Chen", date: "June 2025", tag: "Guide",
+    content: `<p>Every year, over 380 million tons of plastic are produced worldwide — and only 9% of it is ever recycled. The rest ends up in landfills, oceans, and the food chain. The good news: individual action, multiplied across millions of people, genuinely matters.</p>
+    <h4>The top 10 swaps</h4>
+    <ul>
+      <li><strong>Switch to a reusable water bottle.</strong> The average person uses 156 plastic bottles a year. A stainless steel bottle pays back its carbon cost in under two weeks.</li>
+      <li><strong>Bring your own shopping bags.</strong> A single cotton tote used 50+ times offsets 50 plastic bags' worth of environmental damage.</li>
+      <li><strong>Buy a bamboo toothbrush.</strong> Over a billion plastic toothbrushes end up in landfills annually. Bamboo biodegrades in 3–6 months.</li>
+      <li><strong>Use beeswax wraps instead of cling film.</strong> One set of beeswax wraps replaces hundreds of single-use plastic pieces per year.</li>
+      <li><strong>Choose bar soap and shampoo bars.</strong> Eliminates plastic bottles entirely — and they typically last longer per wash than liquid products.</li>
+      <li><strong>Refuse plastic straws.</strong> When ordering drinks, simply say "no straw, please." Carry a reusable metal or bamboo straw if you need one.</li>
+      <li><strong>Buy loose produce.</strong> Supermarkets pre-package fruit and veg in plastic unnecessarily. Shop at markets or choose loose items where possible.</li>
+      <li><strong>Stop buying bottled water.</strong> A good-quality filter jug or tap filter makes tap water just as safe in most countries — at a fraction of the cost.</li>
+      <li><strong>Use mesh produce bags.</strong> Lightweight, washable, and reusable. Keep a set in your shopping bag so they're always with you.</li>
+      <li><strong>Choose products with minimal packaging.</strong> Look for cardboard, glass, or compostable packaging. Vote with your wallet every time you shop.</li>
+    </ul>
+    <p>You don't have to do all ten at once. Pick the two that feel easiest and start there. Each one genuinely reduces the amount of plastic that enters circulation.</p>`
+  },
+  recycling: {
+    title: "The importance of recycling: what you actually need to know",
+    author: "Dr. James Okafor", date: "May 2025", tag: "Deep Dive",
+    content: `<p>Recycling is one of the most talked-about sustainability actions — but it's also one of the most misunderstood. Many of us dutifully sort our waste without knowing what actually happens next, or whether it genuinely makes a difference.</p>
+    <h4>The hard truth about recycling</h4>
+    <p>Globally, only about 9% of all plastic ever produced has been recycled. The rest has been incinerated (12%) or is sitting in a landfill or the natural environment (79%). This doesn't mean recycling is pointless — it means it needs to be done right, and complemented by reduction and reuse.</p>
+    <h4>What is actually recyclable?</h4>
+    <ul>
+      <li><strong>Always recyclable:</strong> Cardboard, paper, glass bottles and jars, aluminium cans, steel tins, PET plastic (type 1), HDPE plastic (type 2).</li>
+      <li><strong>Usually not recyclable:</strong> Black plastic, film plastic, coffee cups, crisp packets, polystyrene, most flexible packaging.</li>
+      <li><strong>Check locally:</strong> Rules vary enormously by council and country. When in doubt, check your local authority's website.</li>
+    </ul>
+    <h4>The most impactful thing you can do</h4>
+    <p>The most impactful hierarchy is: <strong>Refuse → Reduce → Reuse → Recycle</strong>. Recycling is the last resort, not the first. If you can avoid creating the waste in the first place, that's always the better option. But when you do have recyclable material, recycling it properly is far better than landfill.</p>`
+  },
+  busy: {
+    title: "Sustainable living tips for busy people",
+    author: "Priya Nair", date: "April 2025", tag: "Lifestyle",
+    content: `<p>Sustainable living sometimes gets portrayed as a full-time job — meal prepping from scratch, growing your own food, hand-washing your clothes. But for most people, that's not realistic. The good news is that small, consistent habits compounded over time produce real results.</p>
+    <h4>Habits that take under 2 minutes</h4>
+    <ul>
+      <li><strong>Turn your thermostat down by 1°C.</strong> You probably won't notice the difference in comfort — but it reduces your heating energy use by around 3%.</li>
+      <li><strong>Switch to a green energy tariff.</strong> A five-minute phone call or online form can move your household to renewable electricity.</li>
+      <li><strong>Unsubscribe from fast fashion emails.</strong> Out of sight, out of mind. Reducing the temptation is half the battle.</li>
+      <li><strong>Set up a direct debit to an environmental charity.</strong> Even £5/month to a reforestation charity plants dozens of trees a year.</li>
+    </ul>
+    <h4>Weekly habits that fit into existing routines</h4>
+    <ul>
+      <li>Add one plant-based meal to your weekly rotation. Not every meal — just one.</li>
+      <li>Walk or cycle for any journey under 2km instead of driving.</li>
+      <li>Do one full load of laundry on 30°C instead of 40°C or 60°C — saves up to 40% of the energy per wash.</li>
+    </ul>
+    <p>The goal isn't perfection. It's making the sustainable option the path of least resistance in your daily life. Once these habits stick, they happen on autopilot.</p>`
+  },
+  carbon: {
+    title: "Understanding your personal carbon footprint",
+    author: "Lena Hoffman", date: "March 2025", tag: "Climate",
+    content: `<p>A carbon footprint is the total amount of greenhouse gases — primarily CO₂ and methane — that are generated by your actions. The global average is around 4 tonnes of CO₂ per person per year. To limit global warming to 1.5°C, we need to get that down to around 2 tonnes by 2050.</p>
+    <h4>Where does your footprint actually come from?</h4>
+    <ul>
+      <li><strong>Transport (avg. 28%):</strong> Flying is by far the most carbon-intensive activity most individuals do. A single long-haul return flight can produce more CO₂ than six months of driving.</li>
+      <li><strong>Diet (avg. 25%):</strong> Beef and dairy have the highest carbon footprints of any food. Switching to a plant-rich diet is the single highest-impact dietary change you can make.</li>
+      <li><strong>Home energy (avg. 20%):</strong> Heating, hot water, and appliances. Insulation, smart thermostats, and switching to renewable energy are the biggest levers here.</li>
+      <li><strong>Shopping & consumption (avg. 27%):</strong> The stuff we buy — clothing, electronics, furniture — all carries an embedded carbon cost from manufacturing and shipping.</li>
+    </ul>
+    <h4>Where to start</h4>
+    <p>Use a free calculator like the one from <strong>WWF or Carbon Independent</strong> to get a personal baseline. Then focus on the one or two categories where your footprint is highest — that's where you'll get the most impact per effort.</p>`
+  }
+};
+
+function openArticle(id) {
+  var a = articles[id];
+  if (!a) return;
+  document.getElementById('modal-content').innerHTML =
+    '<button class="modal-close" onclick="document.getElementById(\'article-modal\').classList.remove(\'open\')">✕</button>' +
+    '<span class="tag tag-green" style="margin-bottom:14px;display:inline-block;">' + a.tag + '</span>' +
+    '<h2>' + a.title + '</h2>' +
+    '<div class="meta"><span>By ' + a.author + '</span><span>·</span><span>' + a.date + '</span></div>' +
+    a.content;
+  document.getElementById('article-modal').classList.add('open');
+}
+
+function closeModal(e) {
+  if (e.target.id === 'article-modal') document.getElementById('article-modal').classList.remove('open');
+}
+
+function showSection(s) {
+  var sections = ['home','learn','action','community','shop'];
+  sections.forEach(function(id) {
+    var el = document.getElementById('sec-' + id);
+    if (el) el.classList.remove('active');
+    var nav = document.getElementById('nav-' + id);
+    if (nav) nav.classList.remove('active');
+  });
+  var hero = document.getElementById('hero-block');
+  if (hero) hero.style.display = s === 'home' ? 'block' : 'none';
+  var sec = document.getElementById('sec-' + s);
+  if (sec) sec.classList.add('active');
+  var nav = document.getElementById('nav-' + s);
+  if (nav) nav.classList.add('active');
+  window.scrollTo({top: 0, behavior: 'smooth'});
+  return false;
+}
+
+function toggleChallenge(el) {
+  el.classList.toggle('done');
+  var isDone = el.classList.contains('done');
+  var pts = parseInt(el.querySelector('.challenge-pts').textContent);
+  var scoreEl = document.getElementById('score-display');
+  var current = parseInt(scoreEl.textContent);
+  scoreEl.textContent = Math.min(100, Math.max(0, current + (isDone ? pts : -pts)));
+  showToast(isDone ? '✅ Challenge complete! +' + pts + ' pts' : 'Challenge unmarked');
+}
+
+function addToCart(btn, name) {
+  cartCount++;
+  document.getElementById('cart-count').textContent = cartCount;
+  btn.textContent = '✓ Added!';
+  btn.style.background = 'var(--green)';
+  btn.style.color = 'white';
+  setTimeout(function(){ btn.textContent = 'Add to cart'; btn.style.background=''; btn.style.color=''; }, 1800);
+  showToast('🛒 ' + name + ' added to cart');
+}
+
+function filterShop(btn, cat) {
+  document.querySelectorAll('.filter-btn').forEach(function(b){ b.classList.remove('active'); });
+  btn.classList.add('active');
+  document.querySelectorAll('.product-card').forEach(function(card){
+    card.style.display = (cat === 'all' || card.dataset.cat === cat) ? 'block' : 'none';
+  });
+}
+
+function subscribeNewsletter() {
+  var val = document.getElementById('email-input').value;
+  if (!val || !val.includes('@')) { showToast('Please enter a valid email address'); return; }
+  showToast('🎉 Welcome to the EcoDigest! Check your inbox.');
+  document.getElementById('email-input').value = '';
+}
+
+function showToast(msg) {
+  var t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(function(){ t.classList.remove('show'); }, 2800);
+}
+
+function toggleMobileNav() {
+  var ul = document.getElementById('nav-links');
+  ul.style.display = ul.style.display === 'flex' ? 'none' : 'flex';
+  ul.style.flexDirection = 'column';
+  ul.style.position = 'absolute';
+  ul.style.top = '56px';
+  ul.style.left = '0';
+  ul.style.right = '0';
+  ul.style.background = 'white';
+  ul.style.padding = '16px 20px 20px';
+  ul.style.borderBottom = '0.5px solid var(--border)';
+  ul.style.zIndex = '199';
+}
+</script>
+</body>
+</html>
